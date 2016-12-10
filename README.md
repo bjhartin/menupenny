@@ -1,6 +1,6 @@
 # menupenny
 
-Search and navigate any OSX menu without a mouse.
+Directly invoke menu items by search or abbreviation, e.g. "FNT" finds "File/New Tab".
 
 Inspired by nathancahill/Anycomplete.
 
@@ -8,7 +8,7 @@ Inspired by nathancahill/Anycomplete.
 
 ### Features
 
-Use `cmd+esc` (or your custom keybinding) to activate.  Type to find menu items by text or initial letters, e.g. "FNT" or "NT" would find "File/New Tab" in Chrome.
+Use `cmd+esc` (or your custom keybinding) to activate.  Type to find menu items by text or initial letters.
 
 ### Installation
 
