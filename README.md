@@ -1,6 +1,8 @@
 # menupenny
 
-Directly invoke menu items by search or abbreviation, e.g. "FNT" finds "File/New Tab".
+Allows you to use the keyboard to navigate menus in any app.
+
+Invoke menu items by search or abbreviation, e.g. "File", "New Tab" or "FNT" will get you to "File/New Tab".
 
 Inspired by nathancahill/Anycomplete.
 

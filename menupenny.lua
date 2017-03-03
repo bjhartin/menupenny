@@ -1,5 +1,5 @@
 function concatTables(t1, t2)
-   for k,v in pairs(t2) do 
+   for k,v in pairs(t2) do
       table.insert(t1, v)
    end
    return t1
@@ -7,7 +7,8 @@ end
 
 function isValidMenuItem(menuItem)
    -- Currently affected by a bug in AXEnabled: disabled menus will still show.   
-   return menuItem and menuItem.AXTitle and menuItem.AXTitle ~= "" and menuItem.AXEnabled
+   return menuItem and menuItem.AXTitle and menuItem.AXTitle ~= "" 
+   -- and menuItem.AXEnabled (doesn't work)
 end
 
 function computeMenuItemPath(menuItem, parentPath)
@@ -26,8 +27,11 @@ function menuItemsToPaths(menu, parentPath)
     if isValidMenuItem(v) then
       local fullPath = computeMenuItemPath(v, parentPath)
       if v.AXChildren then
-        result = concatTables(result, menuItemsToPaths(v.AXChildren[1], fullPath))
+        local children = v.AXChildren[1]
+        -- print(fullPath .. " has " .. #t .. " children")
+        result = concatTables(result, menuItemsToPaths(children, fullPath))
       else
+        -- print("  " .. fullPath)
         result = concatTables(result, {fullPath})
       end
     end
@@ -78,13 +82,15 @@ function init()
 
   local chooser = hs.chooser.new(function(chosen)
     current:activate()
-    current:selectMenuItem(hs.fnutils.split(chosen["text"], "/"))
+    if chosen ~= nil then
+       current:selectMenuItem(hs.fnutils.split(chosen["text"], "/"))
+    end
   end)
   chooser:bgDark(false)
   chooser:searchSubText(false)
   chooser:show()
 
-  local menu = current.getMenuItems(current)  
+  local menu = current:getMenuItems(current)  
   local menuItemPaths = menuItemsToPaths(menu, nil)
 
   chooser:queryChangedCallback(function(query)
@@ -96,3 +102,8 @@ end
 hs.hotkey.bind({"cmd"}, "escape", function()
   init()
 end)
+
+-- hs.openConsole() Useful for debugging.
+  
+
+
