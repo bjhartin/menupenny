@@ -1,8 +1,8 @@
 # menupenny
 
-Allows you to use the keyboard to navigate menus in any app.
+Menupenny is like Spotlight for OSX menus.
 
-Invoke menu items by search or abbreviation, e.g. "File", "New Tab" or "FNT" will get you to "File/New Tab".
+It works with any OSX app and lets you find and invoke menu items by name or abbreviation.  For example "File", "New Tab" or "FNT" will get you to "File/New Tab".
 
 Inspired by nathancahill/Anycomplete.
 
