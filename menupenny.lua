@@ -1,3 +1,5 @@
+menuItemCache = {} 
+
 function concatTables(t1, t2)
    for k,v in pairs(t2) do
       table.insert(t1, v)
@@ -79,7 +81,6 @@ end
 
 function init()
   local current = hs.application.frontmostApplication()
-
   local chooser = hs.chooser.new(function(chosen)
     current:activate()
     if chosen ~= nil then
@@ -90,10 +91,14 @@ function init()
   chooser:searchSubText(false)
   chooser:show()
 
-  local menu = current:getMenuItems(current)  
-  local menuItemPaths = menuItemsToPaths(menu, nil)
-
   chooser:queryChangedCallback(function(query)
+    local menuItemPaths
+    local title = current:title()
+    if menuItemCache[title] == nil then
+      local menuItems = current:getMenuItems(current)
+      menuItemCache[title] = menuItemsToPaths(menuItems, nil)
+    end
+    menuItemPaths = menuItemCache[title]
     chooser:choices(menuItemsToChoices(searchMenuItems(menuItemPaths, query)))
   end)
 end
