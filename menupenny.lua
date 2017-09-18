@@ -95,7 +95,7 @@ function init()
     local menuItemPaths
     local title = current:title()
     if menuItemCache[title] == nil then
-      local menuItems = current:getMenuItems(current)
+      local menuItems = current:getMenuItems()
       menuItemCache[title] = menuItemsToPaths(menuItems, nil)
     end
     menuItemPaths = menuItemCache[title]
